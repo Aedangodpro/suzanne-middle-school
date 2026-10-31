@@ -7,6 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as FaIcons from "@fortawesome/free-solid-svg-icons";
 import * as FaRegIcons from "@fortawesome/free-regular-svg-icons";
 import * as AllIcons from "./icons";
+import { appIconUrls } from "./apps";
 
 String.prototype.strip = function (c) {
   var i = 0,
@@ -28,6 +29,9 @@ export const Icon = (props) => {
 
   const dispatch = useDispatch();
   var src = `img/icon/${props.ui != null ? "ui/" : ""}${props.src}.png`;
+  if (appIconUrls[props.src]) {
+    src = appIconUrls[props.src];
+  }
   if (props.ext != null || (props.src && props.src.includes("http"))) {
     src = props.src;
   }

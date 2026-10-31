@@ -1,6 +1,10 @@
 export const gene_name = () =>
   Math.random().toString(36).substring(2, 10).toUpperCase();
 
+export const appIconUrls = {
+  wallpapers: "https://img.icons8.com/fluent/1200/wallpaper.jpg",
+};
+
 let installed = JSON.parse(localStorage.getItem("installed") || "[]");
 
 const apps = [
@@ -29,6 +33,12 @@ const apps = [
     action: "SETTINGS",
   },
   {
+    name: "Wallpapers",
+    icon: "wallpapers",
+    type: "app",
+    action: "WALLPAPERS",
+  },
+  {
     name: "Task Manager",
     icon: "taskmanager",
     type: "app",
@@ -47,13 +57,6 @@ const apps = [
     action: "MSEDGE",
   },
   {
-    name: "Buy me a coffee",
-    icon: "buyme",
-    type: "app",
-    action: "EXTERNAL",
-    payload: "https://www.buymeacoffee.com/blueedgetechno",
-  },
-  {
     name: "Store",
     icon: "store",
     type: "app",
@@ -63,12 +66,6 @@ const apps = [
     name: "Recycle Bin",
     icon: "bin0",
     type: "app",
-  },
-  {
-    name: "Blue",
-    icon: "win/user",
-    type: "app",
-    action: "EXPLORER",
   },
   {
     name: "Alarms",
@@ -279,20 +276,6 @@ const apps = [
     name: "Cortana",
     icon: "cortana",
     type: "app",
-  },
-  {
-    name: "Github",
-    icon: "github",
-    type: "app",
-    action: "EXTERNAL",
-    payload: "https://github.com/blueedgetechno/win11React",
-  },
-  {
-    name: "Unescape",
-    icon: "unescape",
-    type: "action",
-    action: "EXTERNAL",
-    payload: "https://blueedge.me/unescape",
   },
   {
     name: "Discord",

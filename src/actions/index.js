@@ -236,6 +236,7 @@ export const loadSettings = () => {
   var sett = localStorage.getItem("setting") || "{}";
   sett = JSON.parse(sett);
 
+  // Migrate the original demo account name to the new desktop owner.
   if (sett.person == null) {
     sett = JSON.parse(JSON.stringify(store.getState().setting));
     if (
@@ -244,6 +245,11 @@ export const loadSettings = () => {
     ) {
       sett.person.theme = "dark";
     }
+  } else if (
+    sett.person.name &&
+    ["blue edge", "blueedge"].includes(sett.person.name.toLowerCase())
+  ) {
+    sett.person.name = "N's PC";
   }
 
   if (sett.person.theme != "light") changeTheme();

@@ -7,12 +7,16 @@ import "./back.scss";
 export const Background = () => {
   const wall = useSelector((state) => state.wallpaper);
   const dispatch = useDispatch();
+  const src =
+    wall.src && wall.src.includes("http")
+      ? wall.src
+      : `img/wallpaper/${wall.src}`;
 
   return (
     <div
       className="background"
       style={{
-        backgroundImage: `url(img/wallpaper/${wall.src})`,
+        backgroundImage: `url(${src})`,
       }}
     ></div>
   );
@@ -138,7 +142,7 @@ export const LockScreen = (props) => {
       <div className="fadeinScreen" data-faded={!lock} data-unlock={unlocked}>
         <Image
           className="rounded-full overflow-hidden"
-          src="img/asset/prof.jpg"
+          src="https://i.postimg.cc/L8Rnmwdt/download.jpg"
           w={200}
           ext
         />

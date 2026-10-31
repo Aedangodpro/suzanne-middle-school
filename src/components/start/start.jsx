@@ -262,12 +262,10 @@ export const StartMenu = () => {
           <div className="menuBar">
             <div className="profile handcr">
               <Icon
-                src="blueProf"
+                src="https://i.postimg.cc/L8Rnmwdt/download.jpg"
                 ui
                 rounded
                 width={26}
-                click="EXTERNAL"
-                payload="https://blueedge.me"
               />
               <div className="usName">{userName}</div>
             </div>

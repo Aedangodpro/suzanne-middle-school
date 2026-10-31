@@ -12,6 +12,10 @@ export const Settings = () => {
   const dispatch = useDispatch();
 
   const wall = useSelector((state) => state.wallpaper);
+  const wallPreview =
+    wall.src && wall.src.includes("http")
+      ? wall.src
+      : `img/wallpaper/${wall.src}`;
 
   const [page, setPage] = useState("System"); // default System
   const [nav, setNav] = useState("");
@@ -123,7 +127,7 @@ export const Settings = () => {
                             <div key={i} className={e.type}>
                               <div className="left">
                                 <img
-                                  src={`img/wallpaper/${wall.src}`}
+                                  src={wallPreview}
                                   alt=""
                                   className="device_img"
                                 />
@@ -206,7 +210,7 @@ export const Settings = () => {
                             <div key={i} className="personaliseTop">
                               <img
                                 className="mainImg"
-                                src={`img/wallpaper/${wall.src}`}
+                                src={wallPreview}
                                 alt=""
                               />
                               <div>

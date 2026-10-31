@@ -139,6 +139,70 @@ body[data-theme="dark"] .calcApp {
   }
 }
 
+.wallpapersApp {
+  background: var(--fakeMica);
+  color: var(--dark-txt);
+
+  .wallpapersHeader {
+    padding: 20px 24px 8px;
+
+    h1 {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+
+    p {
+      margin-top: 4px;
+      font-size: 0.82em;
+      color: var(--sat-txt);
+    }
+  }
+
+  .wallpaperGrid {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 16px;
+    padding: 12px 24px 24px;
+    overflow-y: auto;
+  }
+
+  .wallpaperTile {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    text-align: left;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: var(--comp-clr);
+    color: var(--dark-txt);
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    span {
+      display: block;
+      padding: 8px 10px;
+      font-size: 0.78em;
+    }
+
+    &:hover {
+      border-color: var(--comp-txt);
+    }
+
+    &[data-selected="true"] {
+      border-color: var(--clrPrm);
+      box-shadow: 0 0 0 1px var(--clrPrm);
+    }
+  }
+}
+
 .whiteBoard {
   background: var(--comp-txt);
 }

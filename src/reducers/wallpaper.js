@@ -1,7 +1,7 @@
-var wps = localStorage.getItem("wps") || 0;
 var locked = localStorage.getItem("locked");
 
 const walls = [
+  "https://i.postimg.cc/hvkcZznQ/murder-drones-n.jpg",
   "default/img0.jpg",
   "dark/img0.jpg",
   "ThemeA/img0.jpg",
@@ -24,8 +24,12 @@ const walls = [
 
 const themes = ["default", "dark", "ThemeA", "ThemeB", "ThemeD", "ThemeC"];
 
+var storedWps = parseInt(localStorage.getItem("wps"), 10);
+var wps = Number.isNaN(storedWps) || !walls[storedWps] ? 0 : storedWps;
+
 const defState = {
   themes: themes,
+  walls: walls,
   wps: wps,
   src: walls[wps],
   locked: !(locked == "false"),
@@ -44,7 +48,7 @@ const wallReducer = (state = defState, action) => {
         dir: 0,
       };
     case "WALLNEXT":
-      var twps = (state.wps + 1) % walls.length;
+      var twps = ((Number(state.wps) || 0) + 1) % walls.length;
       localStorage.setItem("wps", twps);
       return {
         ...state,
@@ -86,13 +90,19 @@ const wallReducer = (state = defState, action) => {
         src = "";
 
       if (isIndex) {
-        wps = localStorage.getItem("wps");
-        src = walls[wps] ? walls[wps] : walls[0];
+        var current = parseInt(localStorage.getItem("wps"), 10);
+        wps = Number.isNaN(current) || !walls[current] ? 0 : current;
+        src = walls[wps];
       } else {
         const idx = walls.findIndex((item) => item === action.payload);
-        localStorage.setItem("wps", idx);
-        src = action.payload;
-        wps = walls[idx];
+
+        if (idx != -1) {
+          localStorage.setItem("wps", idx);
+          wps = idx;
+          src = action.payload;
+        } else {
+          src = action.payload;
+        }
       }
 
       return {
