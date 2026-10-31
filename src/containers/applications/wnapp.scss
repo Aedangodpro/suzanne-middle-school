@@ -142,13 +142,18 @@ body[data-theme="dark"] .calcApp {
 .wallpapersApp {
   background: var(--fakeMica);
   color: var(--dark-txt);
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
 
   .wallpapersHeader {
     padding: 20px 24px 8px;
 
     h1 {
-      font-size: 1.5em;
+      font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system,
+        BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+      font-size: 1.6em;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
     p {
@@ -177,13 +182,18 @@ body[data-theme="dark"] .calcApp {
     background: var(--comp-clr);
     color: var(--dark-txt);
     cursor: pointer;
-    transition: all 150ms ease-in-out;
+    transition:
+      border-color 150ms cubic-bezier(0.1, 0.9, 0.2, 1),
+      box-shadow 150ms cubic-bezier(0.1, 0.9, 0.2, 1),
+      transform 150ms cubic-bezier(0.1, 0.9, 0.2, 1);
 
     img {
       display: block;
       width: 100%;
       aspect-ratio: 16 / 10;
       object-fit: cover;
+      transform: scale(1);
+      transition: transform 250ms cubic-bezier(0.1, 0.9, 0.2, 1);
     }
 
     span {
@@ -194,11 +204,39 @@ body[data-theme="dark"] .calcApp {
 
     &:hover {
       border-color: var(--comp-txt);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+
+      img {
+        transform: scale(1.03);
+      }
+    }
+
+    &:active {
+      transform: scale(0.99);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--clrPrm);
+      outline-offset: 2px;
     }
 
     &[data-selected="true"] {
       border-color: var(--clrPrm);
       box-shadow: 0 0 0 1px var(--clrPrm);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wallpaperTile,
+    .wallpaperTile img {
+      transition: none;
+    }
+
+    .wallpaperTile:hover,
+    .wallpaperTile:active,
+    .wallpaperTile:hover img {
+      transform: none;
     }
   }
 }
