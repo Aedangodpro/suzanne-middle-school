@@ -10,20 +10,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  transition: all 0.2s ease;
-}
-
-.bootscreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: #010001;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  cursor: progress;
+  transition: background-color 200ms ease;
 }
 
 .lockscreen {
@@ -40,29 +27,24 @@
   align-items: center;
   font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system,
     BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
-  transition: all 1s ease-in-out;
+  transition: opacity 520ms cubic-bezier(0.1, 0.9, 0.2, 1);
 
   &[data-unlock="true"] {
     opacity: 0;
   }
 
   &::after {
-    -webkit-backdrop-filter: blur(0);
-    backdrop-filter: blur(0);
-    transition: all 200ms ease-in-out;
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0);
+    transition: background-color 220ms cubic-bezier(0.1, 0.9, 0.2, 1);
   }
 
   &[data-blur="true"]::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(25px);
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.45);
   }
 }
 
@@ -77,7 +59,7 @@
   flex-direction: column;
   align-items: center;
   transform: translateY(0);
-  transition: all 200ms ease-in-out;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 
   &[data-faded="true"] {
     opacity: 0;
@@ -94,7 +76,7 @@
   align-items: center;
   opacity: 0;
   transform: translateY(60px);
-  transition: all 400ms ease-in-out;
+  transition: opacity 400ms ease-in-out, transform 400ms ease-in-out;
   pointer-events: none;
 
   &[data-faded="false"] {
@@ -206,41 +188,4 @@
 .slowfadein {
   opacity: 1;
   animation: slowfadein 1s ease-in-out;
-}
-
-// Loader css
-#loader {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: grid;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-// https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring
-
-.progressRing circle {
-  stroke: white;
-  fill: none;
-  stroke-width: 2px;
-  stroke-linecap: round;
-  transform-origin: 50% 50%;
-  transition: all 0.2s ease-in-out 0s;
-  animation: 2s linear 0s infinite normal none running spin-infinite;
-}
-
-@keyframes spin-infinite {
-  0% {
-    stroke-dasharray: 0.01px, 43.97px;
-    transform: rotate(0deg);
-  }
-  50% {
-    stroke-dasharray: 21.99px, 21.99px;
-    transform: rotate(450deg);
-  }
-  100% {
-    stroke-dasharray: 0.01px, 43.97px;
-    transform: rotate(1080deg);
-  }
 }

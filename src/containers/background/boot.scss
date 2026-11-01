@@ -1,0 +1,484 @@
+.bootSeq {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+  will-change: opacity;
+  transition: opacity 420ms cubic-bezier(0.1, 0.9, 0.2, 1);
+
+  &[data-exiting="true"] {
+    opacity: 0;
+  }
+}
+
+.bootStage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: bootStageIn 420ms cubic-bezier(0.1, 0.9, 0.2, 1) both;
+}
+
+@keyframes bootStageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fwStage {
+  gap: 18px;
+}
+
+.boardLogo {
+  width: min(360px, 58vw);
+  max-height: 34vh;
+  object-fit: contain;
+  user-select: none;
+  filter: drop-shadow(0 14px 44px rgba(76, 194, 255, 0.18));
+  animation: boardIn 800ms cubic-bezier(0.1, 0.9, 0.2, 1) both;
+}
+
+@keyframes boardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fwBrand {
+  font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.fwHint {
+  position: absolute;
+  bottom: 34px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.5);
+
+  kbd {
+    margin: 0 3px;
+    padding: 1px 5px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+.winStage {
+  gap: 0;
+}
+
+.winMark {
+  display: grid;
+  grid-template-columns: repeat(2, 36px);
+  gap: 4px;
+  margin-bottom: 64px;
+
+  span {
+    width: 36px;
+    height: 36px;
+    background: #4cc2ff;
+  }
+}
+
+.winDots {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  animation: dotRing 2.2s linear infinite;
+  will-change: transform;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    margin: -2.5px;
+    border-radius: 50%;
+    background: #fff;
+    transform: rotate(calc(var(--i) * 60deg)) translateY(-21px);
+    animation: dotFade 1.45s linear infinite;
+    animation-delay: calc(var(--i) * -0.18s);
+    will-change: opacity;
+  }
+}
+
+@keyframes dotRing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dotFade {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.welcomeStage {
+  background: radial-gradient(
+    circle at 50% 34%,
+    #10538d 0%,
+    #082e52 44%,
+    #04111f 100%
+  );
+}
+
+.welcomeGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 44%,
+    rgba(76, 194, 255, 0.3) 0%,
+    rgba(10, 74, 130, 0.12) 35%,
+    transparent 62%
+  );
+  animation: welcomeBreathe 7s ease-in-out infinite alternate;
+}
+
+@keyframes welcomeBreathe {
+  from {
+    opacity: 0.75;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+.welcomeText {
+  position: relative;
+  margin-bottom: 30px;
+  font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: #fff;
+  animation: welcomeTextIn 700ms cubic-bezier(0.1, 0.9, 0.2, 1) both;
+}
+
+@keyframes welcomeTextIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcomeDots {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  animation-duration: 1.8s;
+
+  i {
+    width: 4px;
+    height: 4px;
+    margin: -2px;
+    transform: rotate(calc(var(--i) * 60deg)) translateY(-12px);
+  }
+}
+
+.shutdownStage {
+  gap: 22px;
+  background: #000;
+}
+
+.shutdownDots {
+  width: 42px;
+  height: 42px;
+
+  i {
+    width: 4px;
+    height: 4px;
+    margin: -2px;
+    transform: rotate(calc(var(--i) * 60deg)) translateY(-16px);
+  }
+}
+
+.shutdownText {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.powerHint {
+  position: absolute;
+  right: 0;
+  bottom: 36px;
+  left: 0;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  animation: bootStageIn 600ms ease both;
+}
+
+.repairScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  background: #000;
+  color: #fff;
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+  animation: bootStageIn 280ms ease both;
+}
+
+.repairBootStage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+}
+
+.repairDots {
+  width: 42px;
+  height: 42px;
+
+  i {
+    width: 4px;
+    height: 4px;
+    margin: -2px;
+    transform: rotate(calc(var(--i) * 60deg)) translateY(-16px);
+  }
+}
+
+.repairTitle {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.repairSub {
+  margin-top: -12px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.repairProgress {
+  width: 280px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.14);
+
+  span {
+    display: block;
+    width: 42%;
+    height: 100%;
+    background: #4cc2ff;
+    animation: repairSlide 1.9s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+  }
+}
+
+@keyframes repairSlide {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(340%);
+  }
+}
+
+.recoveryPage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 8vh 9vw 6vh;
+  background: #0067c0;
+  animation: bootStageIn 320ms ease both;
+}
+
+.recoveryHeader {
+  margin: 0 0 30px;
+  font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.recoveryBody {
+  max-width: 640px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.94);
+
+  p {
+    margin: 0 0 14px;
+  }
+}
+
+.recoveryFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.recoveryBtn {
+  min-width: 132px;
+  padding: 8px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 3px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+}
+
+.recoveryBtn.primary {
+  background: #fff;
+  border-color: #fff;
+  color: #0067c0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.86);
+  }
+}
+
+.recoveryChoices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 2vh;
+}
+
+.recoveryChoice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 230px;
+  height: 150px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  svg {
+    color: #fff;
+  }
+}
+
+.troubleList {
+  display: flex;
+  flex-direction: column;
+  width: min(560px, 100%);
+  margin-top: 10px;
+}
+
+.troubleItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+  }
+
+  svg {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.recoveryNotice {
+  max-width: 560px;
+  margin-top: 22px;
+  padding: 10px 14px;
+  border-left: 3px solid #fff;
+  background: rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bootSeq,
+  .bootStage,
+  .boardLogo,
+  .winDots,
+  .winDots i,
+  .welcomeGlow,
+  .welcomeText,
+  .repairScreen,
+  .recoveryPage,
+  .repairProgress span {
+    animation: none !important;
+    transition: none !important;
+  }
+}

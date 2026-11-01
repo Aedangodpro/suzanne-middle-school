@@ -31,7 +31,8 @@ const defState = {
   wps: wps,
   src: walls[wps],
   locked: true,
-  booted: false || import.meta.env.MODE == "development",
+  booted: false,
+  repair: false,
   act: "",
   dir: 0,
 };
@@ -58,6 +59,16 @@ const wallReducer = (state = defState, action) => {
         locked: true,
         dir: -1,
       };
+    case "WALLREPAIR":
+      return {
+        ...state,
+        repair: true,
+      };
+    case "REPAIRCLOSE":
+      return {
+        ...state,
+        repair: false,
+      };
     case "WALLBOOTED":
       return {
         ...state,
@@ -71,6 +82,7 @@ const wallReducer = (state = defState, action) => {
         booted: false,
         dir: -1,
         locked: true,
+        repair: false,
         act: "restart",
       };
     case "WALLSHUTDN":
@@ -79,6 +91,7 @@ const wallReducer = (state = defState, action) => {
         booted: false,
         dir: -1,
         locked: true,
+        repair: false,
         act: "shutdn",
       };
     case "WALLSET":

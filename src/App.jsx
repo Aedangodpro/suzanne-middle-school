@@ -14,7 +14,12 @@ import {
   WidPane,
 } from "./components/start";
 import Taskbar from "./components/taskbar";
-import { Background, BootScreen, LockScreen } from "./containers/background";
+import {
+  Background,
+  BootSequence,
+  LockScreen,
+  RepairScreen,
+} from "./containers/background";
 
 import { loadSettings } from "./actions";
 import * as Applications from "./containers/applications";
@@ -88,7 +93,7 @@ function App() {
     } catch (err) {}
 
     var actionType0 = getComputedStyle(event.target).getPropertyValue(
-      "--prefix",
+      "--prefix"
     );
 
     ess.forEach((item, i) => {
@@ -122,25 +127,51 @@ function App() {
 
   window.onclick = afterMath;
 
-  window.onload = (e) => {
-    dispatch({ type: "WALLBOOTED" });
-  };
+  useEffect(() => {
+    loadSettings();
+  }, []);
 
   useEffect(() => {
-    if (!window.onstart) {
-      loadSettings();
-      window.onstart = setTimeout(() => {
-        // console.log("prematurely loading ( ﾉ ﾟｰﾟ)ﾉ");
-        dispatch({ type: "WALLBOOTED" });
-      }, 5000);
-    }
-  });
+    const onKeyDown = (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "r") {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch({ type: "WALLRESTART" });
+        return;
+      }
+
+      if (
+        event.ctrlKey &&
+        !event.shiftKey &&
+        !event.altKey &&
+        event.key.toLowerCase() === "b"
+      ) {
+        const target = event.target;
+        const typing =
+          target &&
+          (target.tagName === "INPUT" ||
+            target.tagName === "TEXTAREA" ||
+            target.isContentEditable);
+
+        if (!typing) {
+          event.preventDefault();
+          dispatch({ type: "WALLREPAIR" });
+        }
+        return;
+      }
+
+      if (event.key === "Escape" && wall.repair) {
+        dispatch({ type: "REPAIRCLOSE" });
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown, true);
+    return () => window.removeEventListener("keydown", onKeyDown, true);
+  }, [dispatch, wall.repair]);
 
   return (
     <div className="App">
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        {!wall.booted ? <BootScreen dir={wall.dir} /> : null}
-        {wall.locked ? <LockScreen dir={wall.dir} /> : null}
         <div className="appwrap">
           <Background />
           <div className="desktop" data-menu="desk">
@@ -167,6 +198,9 @@ function App() {
           <Taskbar />
           <ActMenu />
         </div>
+        {!wall.booted ? <BootSequence /> : null}
+        {wall.repair ? <RepairScreen /> : null}
+        {wall.locked ? <LockScreen dir={wall.dir} /> : null}
       </ErrorBoundary>
     </div>
   );
