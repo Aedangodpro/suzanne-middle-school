@@ -1,0 +1,199 @@
+.recycleBin {
+  background: var(--fakeMica);
+  color: var(--txt-col);
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+
+  .windowScreen {
+    background: var(--bg1);
+  }
+
+  .rbRibbon {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: var(--fakeMica);
+    border-bottom: 1px solid var(--gray2);
+    font-size: 0.8em;
+  }
+
+  .rbSec {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    border-right: 1px solid var(--gray2);
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  .rbEnd {
+    margin-left: auto;
+  }
+
+  .rbBtn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--hover-bg);
+    }
+  }
+
+  .rbDisabled {
+    opacity: 0.45;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .rbBar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: var(--bg1);
+    border-bottom: 1px solid var(--gray2);
+  }
+
+  .rbNav {
+    padding: 5px;
+    border-radius: 4px;
+    color: var(--gray-txt);
+
+    &:hover {
+      background: var(--hover-bg);
+    }
+  }
+
+  .rbPath {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 8px;
+    border: 1px solid var(--gray1);
+    border-radius: 4px;
+    background: var(--bg1);
+    font-size: 0.78em;
+    color: var(--med-dark);
+  }
+
+  .rbSearch {
+    width: 24%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 8px;
+    border: 1px solid var(--gray1);
+    border-radius: 4px;
+    background: var(--bg1);
+
+    input {
+      width: 100%;
+      background: transparent;
+      color: var(--txt-col);
+      font-size: 0.78em;
+
+      &::placeholder {
+        color: var(--med-txt);
+      }
+    }
+  }
+
+  .rbBody {
+    display: flex;
+    flex-grow: 1;
+    min-height: 0;
+    background: var(--bg1);
+  }
+
+  .rbNavPane {
+    width: 180px;
+    flex-shrink: 0;
+    padding: 6px;
+    overflow-y: auto;
+    border-right: 1px solid var(--gray2);
+  }
+
+  .rbNavItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.78em;
+    color: var(--txt-col);
+
+    &:hover {
+      background: var(--hover-bg);
+    }
+  }
+
+  .rbDivider {
+    height: 1px;
+    margin: 6px 8px;
+    background: var(--gray2);
+  }
+
+  .rbContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .rbCols {
+    display: grid;
+    grid-template-columns: 1.6fr 1.4fr 1fr 0.6fr 1fr 1fr;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--gray2);
+    font-size: 0.75em;
+    color: var(--med-txt);
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .rbEmpty {
+    padding-top: 1.4em;
+    text-align: center;
+    font-size: 0.78em;
+    color: var(--txt-col);
+  }
+
+  .rbStatus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 8px;
+    background: var(--bg2);
+    border-top: 1px solid var(--gray2);
+    font-size: 0.72em;
+    color: var(--med-txt);
+  }
+
+  .rbViews {
+    display: flex;
+
+    .rbView {
+      padding: 2px;
+      border-radius: 3px;
+
+      &:hover {
+        background: var(--hover-bg);
+      }
+    }
+  }
+}

@@ -66,6 +66,7 @@ const apps = [
     name: "Recycle Bin",
     icon: "bin0",
     type: "app",
+    action: "RECYCLEBIN",
   },
   {
     name: "Alarms",
