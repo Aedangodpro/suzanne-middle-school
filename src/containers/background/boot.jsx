@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./boot.scss";
 
-const BOARD_LOGO =
+export const BOARD_LOGO =
   "https://i.postimg.cc/C5WctqxC/murder-drones-logo-updated-again-by-bunobunart-dgscfc4-pre.png";
 
 const TIMING = {
@@ -11,15 +11,6 @@ const TIMING = {
   fade: 420,
   shutdown: 2400,
 };
-
-export const WindowsMark = () => (
-  <div className="winMark" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-);
 
 export const WindowsSpinner = ({ className = "" }) => (
   <div
@@ -109,7 +100,12 @@ export const BootSequence = () => {
 
       {stage === "windows" && (
         <div className="bootStage winStage">
-          <WindowsMark />
+          <img
+            className="bootMoboMark"
+            src={BOARD_LOGO}
+            alt="N's PC"
+            draggable="false"
+          />
           <WindowsSpinner className="bootDots" />
         </div>
       )}

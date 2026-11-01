@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Icon } from "../../utils/general";
-import { WindowsSpinner } from "./boot";
+import { BOARD_LOGO, WindowsSpinner } from "./boot";
 
 const troubleOptions = [
   [
@@ -43,6 +43,12 @@ export const RepairScreen = () => {
     return (
       <div className="repairScreen" role="status" aria-live="polite">
         <div className="repairBootStage">
+          <img
+            className="repairLogo"
+            src={BOARD_LOGO}
+            alt="N's PC"
+            draggable="false"
+          />
           <WindowsSpinner className="repairDots" />
           <div className="repairTitle">
             {stage === "preparing"
