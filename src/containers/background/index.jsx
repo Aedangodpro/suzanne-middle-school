@@ -75,33 +75,30 @@ export const LockScreen = (props) => {
   const [lock, setLock] = useState(false);
   const [unlocked, setUnLock] = useState(false);
   const [password, setPass] = useState("");
-  const [passType, setType] = useState(1);
-  const [forgot, setForget] = useState(false);
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
 
   const userName = useSelector((state) => state.setting.person.name);
 
   const action = (e) => {
-    var act = e.target.dataset.action,
-      payload = e.target.dataset.payload;
+    var act = e.target.dataset.action;
 
     if (act == "splash") setLock(true);
     else if (act == "inpass") {
-      var val = e.target.value;
-      if (!passType) {
-        val = val.substring(0, 4);
-        val = !Number(val) ? "" : val;
-      }
-
-      setPass(val);
-    } else if (act == "forgot") setForget(true);
-    else if (act == "pinlock") setType(0);
-    else if (act == "passkey") setType(1);
-
-    if (act == "pinlock" || act == "passkey") setPass("");
+      setPass(e.target.value);
+      setError(false);
+    }
   };
 
   const proceed = () => {
+    if (unlocked) return;
+
+    if (password !== "0324") {
+      setError(true);
+      setPass("");
+      return;
+    }
+
     setUnLock(true);
     setTimeout(() => {
       dispatch({ type: "WALLUNLOCK" });
@@ -149,27 +146,31 @@ export const LockScreen = (props) => {
         <div className="mt-2 text-2xl font-medium text-gray-200">
           {userName}
         </div>
-        <div className="flex items-center mt-6 signInBtn" onClick={proceed}>
-          Sign in
+        <div className="signInRow" data-error={error}>
+          <input
+            type="password"
+            className="passInput"
+            value={password}
+            onChange={action}
+            data-action="inpass"
+            onKeyDown={action2}
+            placeholder="Password"
+            aria-label="Password"
+            autoComplete="current-password"
+          />
+          <button
+            type="button"
+            className="signInArrow"
+            aria-label="Sign in"
+            onClick={proceed}
+          >
+            <Icon fafa="faArrowRight" width={14} color="currentColor" />
+          </button>
         </div>
-        {/*   <input type={passType?"text":"password"} value={password} onChange={action}
-              data-action="inpass" onKeyDown={action2} placeholder={passType?"Password":"PIN"}/>
-          <Icon className="-ml-6 handcr" fafa="faArrowRight" width={14}
-            color="rgba(170, 170, 170, 0.6)" onClick={proceed}/>
+        <div className="signInError" data-visible={error}>
+          Incorrect password. Try again.
         </div>
-        <div className="text-xs text-gray-400 mt-4 handcr"
-          onClick={proceed}>
-          {!forgot?`I forgot my ${passType?"password":"pin"}`:"Not my problem"}
-        </div>
-        <div className="text-xs text-gray-400 mt-6">
-          Sign-in options
-        </div>
-        <div className="lockOpt flex">
-          <Icon src="pinlock" onClick={action} ui width={36}
-            click="pinlock" payload={passType==0}/>
-          <Icon src="passkey" onClick={action} ui width={36}
-            click="passkey" payload={passType==1}/>
-        </div> */}
+        <div className="text-xs text-gray-400 mt-6">Sign-in options</div>
       </div>
       <div className="bottomInfo flex">
         <Icon className="mx-2" src="wifi" ui width={16} invert />

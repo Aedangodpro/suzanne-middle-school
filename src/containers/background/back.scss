@@ -38,6 +38,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
   transition: all 1s ease-in-out;
 
   &[data-unlock="true"] {
@@ -105,36 +107,89 @@
     opacity: 0;
   }
 
-  .signInBtn {
-    background: rgba(255, 255, 255, 0.2);
-    font-size: 13px;
-    padding: 4px 36px 6px;
-    color: #fff;
-    border: 2px solid transparent;
-    border-radius: 4px;
+  .signInRow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 280px;
+    margin-top: 24px;
 
-    &:hover {
-      border: 2px solid rgba(255, 255, 255, 0.33);
+    .passInput {
+      width: 100%;
+      padding: 8px 40px 8px 12px;
+      font: inherit;
+      font-size: 14px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.65);
+      border-radius: 4px;
+      outline: none;
+      backdrop-filter: blur(30px);
+      transition: border-color 150ms cubic-bezier(0.1, 0.9, 0.2, 1);
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      &:focus {
+        border-bottom-color: #a3cdfa;
+      }
     }
 
-    &:active {
-      border: 2px solid transparent;
-      background: rgba(255, 255, 255, 0.33);
+    &[data-error="true"] .passInput {
+      border-bottom-color: #ff99a4;
+      animation: shake 300ms cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    .signInArrow {
+      position: absolute;
+      right: 6px;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      color: #fff;
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 100ms cubic-bezier(0.1, 0.9, 0.2, 1);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      &:focus-visible {
+        outline: 2px solid #a3cdfa;
+      }
+    }
+  }
+
+  .signInError {
+    height: 18px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #ff99a4;
+    opacity: 0;
+    transition: opacity 150ms cubic-bezier(0.1, 0.9, 0.2, 1);
+
+    &[data-visible="true"] {
+      opacity: 1;
     }
   }
 }
 
-.lockOpt {
-  margin-top: 10px;
-
-  .uicon {
-    margin: 0 4px;
-    cursor: pointer;
-
-    &[data-payload="true"] {
-      box-sizing: border-box;
-      border: 1px solid #888;
-    }
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
   }
 }
 

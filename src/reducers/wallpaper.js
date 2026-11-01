@@ -1,5 +1,3 @@
-var locked = localStorage.getItem("locked");
-
 const walls = [
   "https://i.postimg.cc/hvkcZznQ/murder-drones-n.jpg",
   "default/img0.jpg",
@@ -32,7 +30,7 @@ const defState = {
   walls: walls,
   wps: wps,
   src: walls[wps],
-  locked: !(locked == "false"),
+  locked: true,
   booted: false || import.meta.env.MODE == "development",
   act: "",
   dir: 0,
@@ -41,7 +39,6 @@ const defState = {
 const wallReducer = (state = defState, action) => {
   switch (action.type) {
     case "WALLUNLOCK":
-      localStorage.setItem("locked", false);
       return {
         ...state,
         locked: false,
