@@ -88,13 +88,15 @@
 }
 
 .winStage {
-  gap: 0;
+  justify-content: flex-start;
+  gap: 12vh;
+  padding-top: 28vh;
 }
 
 .bootMoboMark {
-  width: min(210px, 44vw);
-  max-height: 24vh;
-  margin-bottom: 52px;
+  width: clamp(280px, 42vw, 520px);
+  max-height: 34vh;
+  margin-bottom: 0;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 12px 36px rgba(76, 194, 255, 0.22));
@@ -264,8 +266,8 @@
 }
 
 .repairLogo {
-  width: min(180px, 40vw);
-  max-height: 16vh;
+  width: clamp(220px, 30vw, 360px);
+  max-height: 20vh;
   object-fit: contain;
   user-select: none;
   filter: drop-shadow(0 10px 30px rgba(76, 194, 255, 0.2));
@@ -471,6 +473,25 @@
   background: rgba(0, 0, 0, 0.18);
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
+}
+
+.recoveryWatermark {
+  position: absolute;
+  top: 7vh;
+  right: 6vw;
+  width: clamp(180px, 30vw, 320px);
+  max-height: 22vh;
+  object-fit: contain;
+  opacity: 0.09;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 900px) {
+  .recoveryWatermark {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

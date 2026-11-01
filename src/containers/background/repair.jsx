@@ -172,6 +172,14 @@ export const RepairScreen = () => {
           </div>
         </div>
       )}
+
+      <img
+        className="recoveryWatermark"
+        src={BOARD_LOGO}
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+      />
     </div>
   );
 };
