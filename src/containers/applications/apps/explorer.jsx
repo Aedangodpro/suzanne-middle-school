@@ -330,6 +330,7 @@ const ContentArea = ({ searchtxt }) => {
 const NavPane = ({}) => {
   const files = useSelector((state) => state.files);
   const special = useSelector((state) => state.files.data.special);
+  const dispatch = useDispatch();
 
   return (
     <div className="navpane win11Scroll">
@@ -360,6 +361,14 @@ const NavPane = ({}) => {
           <Dropdown icon="music" title="Music" spid="%music%" />
           <Dropdown icon="pics" title="Pictures" spid="%pictures%" />
           <Dropdown icon="vid" title="Videos" spid="%videos%" />
+          <div
+            className="navtitle flex prtclk"
+            onClick={() => dispatch({ type: "RECYCLEBIN", payload: "full" })}
+            title="Open Recycle Bin"
+          >
+            <Icon className="mr-1" src="bin0" width={16} />
+            <span>Recycle Bin</span>
+          </div>
           <Dropdown icon="disc" title="OS (C:)" spid="%cdrive%" />
           <Dropdown icon="disk" title="Blue (D:)" spid="%ddrive%" />
         </Dropdown>

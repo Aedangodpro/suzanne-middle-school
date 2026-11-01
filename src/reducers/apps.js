@@ -71,6 +71,26 @@ const appReducer = (state = defState, action) => {
     obj.z = tmpState.hz;
     tmpState["terminal"] = obj;
     return tmpState;
+  } else if (action.type == "GOTOFOLDER") {
+    // Jump from the Recycle Bin into File Explorer at the requested folder.
+    tmpState = { ...state };
+    var binApp = { ...tmpState["bin0"] };
+    var explorerApp = { ...tmpState["explorer"] };
+
+    if (binApp.z == tmpState.hz) tmpState.hz -= 1;
+    binApp.hide = true;
+    binApp.max = null;
+    binApp.z = -1;
+    tmpState["bin0"] = binApp;
+
+    explorerApp.size = "full";
+    explorerApp.hide = false;
+    explorerApp.max = true;
+    tmpState.hz += 1;
+    explorerApp.z = tmpState.hz;
+    tmpState["explorer"] = explorerApp;
+
+    return tmpState;
   } else if (action.type == "ADDAPP") {
     tmpState[action.payload.icon] = action.payload;
     tmpState[action.payload.icon].size = "full";

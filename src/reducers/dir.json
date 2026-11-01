@@ -221,7 +221,14 @@
           }
         }
       },
-      "Windows": {}
+      "Windows": {},
+      "Recycle Bin": {
+        "name": "Recycle Bin",
+        "info": {
+          "spid": "%recyclebin%",
+          "icon": "bin"
+        }
+      }
     }
   },
   "D:": {

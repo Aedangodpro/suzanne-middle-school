@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Battery from "../../components/shared/Battery";
 import { Icon, Image } from "../../utils/general";
+import { verifyPassword } from "../../utils/lock";
 import "./back.scss";
 
 export const Background = () => {
@@ -76,6 +77,7 @@ export const LockScreen = (props) => {
   const [unlocked, setUnLock] = useState(false);
   const [password, setPass] = useState("");
   const [error, setError] = useState(false);
+  const [checking, setChecking] = useState(false);
   const dispatch = useDispatch();
 
   const userName = useSelector((state) => state.setting.person.name);
@@ -90,10 +92,14 @@ export const LockScreen = (props) => {
     }
   };
 
-  const proceed = () => {
-    if (unlocked) return;
+  const proceed = async () => {
+    if (unlocked || checking) return;
 
-    if (password !== "0324") {
+    setChecking(true);
+    const valid = await verifyPassword(password);
+    setChecking(false);
+
+    if (!valid) {
       setError(true);
       setPass("");
       return;
@@ -157,11 +163,14 @@ export const LockScreen = (props) => {
             placeholder="Password"
             aria-label="Password"
             autoComplete="current-password"
+            disabled={checking}
           />
           <button
             type="button"
             className="signInArrow"
             aria-label="Sign in"
+            aria-busy={checking}
+            disabled={checking}
             onClick={proceed}
           >
             <Icon fafa="faArrowRight" width={14} color="currentColor" />

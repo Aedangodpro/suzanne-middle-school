@@ -18,7 +18,7 @@ const fileReducer = (state = defState, action) => {
 
   if (action.type === "FILEDIR") {
     tmp.cdir = action.payload;
-  } else if (action.type === "FILEPATH") {
+  } else if (action.type === "FILEPATH" || action.type === "GOTOFOLDER") {
     var pathid = tmp.data.parsePath(action.payload);
     if (pathid) tmp.cdir = pathid;
   } else if (action.type === "FILEBACK") {

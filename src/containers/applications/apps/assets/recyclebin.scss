@@ -166,6 +166,36 @@
     }
   }
 
+  .rbRows {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .rbRow {
+    display: grid;
+    grid-template-columns: 1.6fr 1.4fr 1fr 0.6fr 1fr 1fr;
+    align-items: center;
+    padding: 5px 12px;
+    font-size: 0.78em;
+    color: var(--txt-col);
+
+    &:hover {
+      background: var(--hover-bg);
+    }
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .rbName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .rbEmpty {
     padding-top: 1.4em;
     text-align: center;
